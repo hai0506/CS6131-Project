@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Contact us | RBLX{% endblock %}
+{% block content %}
+<body style="background-color: #f9f9f8;">
+  <div class="container text-center" style="margin-top:50px; margin-bottom: 30px;">
+    <h4 style="font-weight:bold">Contact us</h4>
+    <h6>Resolve your issue through our 24/7 customer service portal.</h6>
+  </div>
+  <div class="container bg-white" style="padding: 50px; max-width: 500px;">
+    <form>
+      <div class="form-outline mb-4">
+        <label class="form-label" for="loginName">Email or phone number:</label>
+        <input type="text" id="contactnName" class="form-control form-control-lg" />
+      </div>
+      <div class="form-outline mb-4">
+        <label class="form-label" for="loginPassword">Please describe your issue:</label>
+        <textarea class="form-control" id="contactDesc" rows="5"></textarea>
+      </div>
+      <button type="submit" class="btn btn-dark btn-block mb-4">Submit</button>
+    </form>
+  </div>
+</body>
+{% endblock %}  

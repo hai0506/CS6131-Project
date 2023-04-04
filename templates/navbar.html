@@ -1,0 +1,65 @@
+<div class="container-fluid border-bottom" id="menu-tab">
+    <div class="row">
+    <div class="col-4 d-flex align-items-center">
+        <a href="{{ url_for('contact') }}" style="color: black; margin-left: 20px;">
+        Contact us
+        </a>
+    </div>
+    <div class="col-4 text-center">
+        <a class="container-fluid" href="{{ url_for('home') }}">
+            <img class="img-fluid" src="{{ url_for('static',filename='icons/logo.png') }}" width="150"></i>
+        </a>
+    </div>
+    <div class="col-4 d-flex flex-row-reverse" style="padding-right: 30px">
+        <div class="row justify-content-center">
+        <a class="nav-link" href="{{ url_for('search',category='All') }}">
+            <div class="col">
+                <div class="row justify-content-center"><img class="img" src="{{ url_for('static',filename='icons/search-icon.png') }}" width="24"></i></div>
+                <div class="row justify-content-center" style="font-size:12px; margin-top: 10px;">Search</div>
+            </div>
+        </a>
+        {% if session['username'] %} 
+        <a class="nav-link" href="{{ url_for('profile') }}">
+            <div class="col">
+                <div class="row justify-content-center"><img class="img" src="{{ url_for('static',filename='icons/account.png') }}" width="26"></i></div>
+                <div class="row justify-content-center" style="font-size:12px; margin-top: 9px;"> {{ session['name'] }} 
+                </div>
+            </div>
+        </a>
+        {% else %}
+        <a class="nav-link" href="{{ url_for('login') }}">
+            <div class="col">
+                <div class="row justify-content-center"><img class="img" src="{{ url_for('static',filename='icons/account.png') }}" width="26"></i></div>
+                <div class="row justify-content-center" style="font-size:12px; margin-top: 9px;"> Sign in
+                </div>
+            </div>
+        </a>
+        {% endif %}
+        <a class="nav-link" href="{{ url_for('favourites') }}">
+            <div class="col">
+                <div class="row justify-content-center"><img class="img" src="{{ url_for('static',filename='icons/heart.png') }}" width="29"></i></div>
+                <div class="row justify-content-center" style="font-size:12px; margin-top: 9px;">Favourites</div>
+            </div>
+        </a>
+        <a class="nav-link" href="{{ url_for('cart') }}">
+            <div class="col">
+                <div class="row justify-content-center"><img class="img" src="{{ url_for('static',filename='icons/cart.png') }}" width="33"></i></div>
+                <div class="row justify-content-center" style="font-size:12px; margin-top: 10px;">Cart</div>
+            </div>
+        </a>
+        </div>  
+    </div>
+    </div>
+</div>
+
+<div class="container-fluid align-content-center" id="menu-list">
+    <ul class="list-inline text-center">
+    <a class="list-inline-item" href="{{ url_for('search',category='Men') }}">MEN</a>
+    <a class="list-inline-item" href="{{ url_for('search',category='Women') }}">WOMEN</a>
+    <a class="list-inline-item" href="{{ url_for('search',category='Kids') }}">KIDS</a>          
+    <a class="list-inline-item" href="{{ url_for('search',category='Top') }}">TOPS</a>
+    <a class="list-inline-item" href="{{ url_for('search',category='Bottom') }}">BOTTOMS</a>
+    <a class="list-inline-item" href="{{ url_for('search',category='Hat') }}">HATS</a>
+    <a class="list-inline-item" href="{{ url_for('search',category='Shoes') }}">SHOES</a>
+    </ul>
+</div>

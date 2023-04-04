@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block title %}Catalogue | RBLX{% endblock %}
+{% block content %}
+<body style="background-color: white;">
+  <div class="container">
+    <div class="row justify-content-center mb-3"><h5 class="font-weight-bold">Catalogue</h5></div>
+
+    <form id="searchForm">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex">
+            <div class="dropdown">
+              <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                Sort by
+              </button>
+              <div class="dropdown-menu">
+                <div class="form-group">
+                  <div class="form-check">
+                    {% if sortby=='recent' %}<input class="form-check-input" type="radio" name="sort" id="recent" value="recent" onclick="submit()" checked>
+                    {% else %}<input class="form-check-input" type="radio" name="sort" id="recent" value="recent" onclick="submit()"> {% endif %}
+                    <label class="form-check-label" for="recent">Sort by newest</label>
+                  </div>  
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    {% if sortby=='priMin' %}<input class="form-check-input" type="radio" name="sort" id="priMin" value="priMin" onclick="submit()" checked>
+                    {% else %}<input class="form-check-input" type="radio" name="sort" id="priMin" value="priMin" onclick="submit()"> {% endif %}
+                    <label class="form-check-label" for="priMin">Sort by lowest price</label>
+                  </div>  
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    {% if sortby=='priMax' %}<input class="form-check-input" type="radio" name="sort" id="priMax" value="priMax" onclick="submit()" checked>
+                    {% else %}<input class="form-check-input" type="radio" name="sort" id="priMax" value="priMax" onclick="submit()"> {% endif %}
+                    <label class="form-check-label" for="priMax">Sort by highest price</label>
+                  </div>  
+                </div>
+              </div>
+            </div>         
+
+            <div class="dropdown">
+              <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                Size
+              </button>
+              <div class="dropdown-menu">
+                {% for size in size_dropdown %}
+                <div class="form-group">
+                  <div class="form-check">
+                    {% if sizes is none or size not in sizes %}
+                    <input class="form-check-input" type="checkbox" name="size" id={{size}} value={{size}} onclick="submit()">
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="size" id={{size}} value={{size}} checked onclick="submit()">
+                    {% endif %}
+                    <label class="form-check-label" for={{size}}>{{size}}</label>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>    
+                        
+            <div class="dropdown">
+              <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                Color
+              </button>
+              <div class="dropdown-menu">
+                {% for color in color_dropdown %}
+                <div class="form-group">
+                  <div class="form-check">
+                    {% if colors is none or color not in colors %}
+                    <input class="form-check-input" type="checkbox" name="color" id={{color}} value={{color}} onclick="submit()">
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="color" id={{color}} value={{color}} checked onclick="submit()">
+                    {% endif %}
+                    <label class="form-check-label" for="{{color}}">{{color}}</label>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>     
+            <div class="dropdown">
+              <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                Product type
+              </button>
+              <div class="dropdown-menu">
+                {% for type in type_dropdown %}
+                <div class="form-group">
+                  <div class="form-check">
+                    {% if types is none or type not in types %}
+                    <input class="form-check-input" type="checkbox" name="type" id={{type}} value={{type}} onclick="submit()">
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="type" id={{type}} value={{type}} checked onclick="submit()">
+                    {% endif %}
+                    <label class="form-check-label" for="{{type}}">{{type}}</label>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>     
+          </div>
+        </div> 
+
+        <div class="col d-flex flex-row-reverse mr-3">
+          <div class="form-group has-search">
+            <span class="form-control-feedback">
+              <img src="{{url_for('static',param=param, filename='icons/search-icon.png')}}" width="15">
+            </span>
+            <input type="text" class="form-control" name="search" id="search" placeholder="Search products" maxlength="50" onkeypress="Javascript: if (event.keyCode==13) submit();">
+          </div>
+        </div> 
+      </div>
+    </form>
+
+    {% for row in items|batch(4) %}
+    <div class="row mb-3">
+      {% for item in row %}
+      <div class="col-md-3">
+        <div style="margin: 2px;">
+          <div class="card" style="width: 17.5rem;height: 24rem;margin-bottom: 10px;">
+            <a href="{{ url_for('product',pid=item['pid']) }}">
+              <img class="card-img-top" src="{{url_for('static',param=param, filename=item.image)}}" style="object-fit: cover;">
+            </a>
+          </div>
+          <a href="{{ url_for('product',pid=item['pid']) }}" style="color: black;">{{item['name']}}</a>
+          <h6>{{item['price']}}</h6>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+
+</body>  
+
+{% endblock %}

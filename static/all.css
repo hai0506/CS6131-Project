@@ -1,0 +1,219 @@
+a:hover {
+    color: inherit;
+}
+.nav-link {
+    text-decoration: none;
+    color: black;
+}
+.list-inline-item {
+    margin-left: 20pt;
+    margin-right: 20pt;
+}
+.img-btn {
+    background: #000;
+}
+.form-control {
+    border-color: #000000;
+    border-radius: 0;
+}
+.form-control:focus {
+    box-shadow: none;
+    border-color: #000000;
+}
+#menu-tab {
+    padding-top: 10pt;
+    padding-bottom: 10px;
+    border-bottom: 2px;
+    background-color: white;
+}
+#menu-list {
+    padding-top: 15px;
+    padding-bottom: 1px;
+    box-shadow: 0 4px 2px -2px #e8e8e8;
+    margin-bottom: 30px;
+    list-style: none;
+    background-color: white;
+}
+* {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.list-inline-item {
+    color: #000000; 
+    text-decoration: none;
+}
+.img-txt {
+    position: absolute;
+    bottom: -20pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 42px;
+    font-weight: bold;
+}
+.img-txt2 {
+    position: absolute;
+    bottom: -20pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 14px;
+}
+.img-txt3 {
+    position: absolute;
+    bottom: -505pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 42px;
+    font-weight: bold;
+}
+.img-txt4 {
+    position: absolute;
+    bottom: -505pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 14px;
+}
+.img-txt5 {
+    position: absolute;
+    bottom: -975pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 42px;
+    font-weight: bold;
+}
+.img-txt6 {
+    position: absolute;
+    bottom: -975pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 14px;
+}
+.img-btn {
+    position: absolute;
+    bottom: -65pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 7px;
+    
+}
+.img-btn2 {
+    position: absolute;
+    bottom: -550pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 7px;
+    
+}
+.img-btn3 {
+    position: absolute;
+    bottom: -1020pt;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 7px;
+    
+}
+.img-btn:hover, .img-btn2:hover, .img-btn3:hover {
+    background: #e3e3e3;
+    text-decoration: none;
+}
+.btn-bottom {
+    display: block;
+    width: 900px;
+    margin: auto;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #292b2c;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+.btn-bottom:hover {
+    background: #383838;
+    color: white;
+    text-decoration: none;
+}
+#login-container {
+    width: 500px;
+    margin-top: 50pt;
+}
+#pills-login-tab, #pills-register-tab {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+}
+#nav-login {
+    border-right:2px solid #444444;
+}
+#nav-login .active{
+    border-bottom:2px solid #444444;
+}
+#nav-register .active{
+    border-bottom:2px solid #444444;
+}
+.btn[type="submit"] {
+    border-radius: 0;
+    padding: 10px;
+    margin-top: 10px;
+}
+dd {
+    color:#575757;
+    font-weight: lighter;
+    font-size: 14px;
+    margin: 2px;
+    margin-left: 5px;
+}
+dt {
+    padding-right: 100px;
+    margin-bottom: 10px;
+    border-bottom:darkgray solid 1px;
+}
+#search-filter-col {
+    margin-left: 10px;
+    border-right: 1px darkgray solid;
+}
+.form-label {
+    font-size: 14px;
+}
+.btn[href="search"] {
+    border-radius: 0;
+    border-left: none;
+}
+a[href="contact"] {
+    margin-left: 30px;
+    color: black
+}
+.or {
+    color: #575757;
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #575757; 
+    line-height: 0.1em;
+    margin: 40px 0 40px; 
+} 
+ 
+h5 span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+#profile-tab {
+    padding: 20px;
+    border-bottom:#f9f9f8 solid 3px;
+    box-shadow: 0px 0px 2px 2px #e8e8e8;
+}

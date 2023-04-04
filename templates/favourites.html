@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Favourites | RBLX{% endblock %}
+{% block content %}
+<body style="background-color: white;">
+  {% if items %}
+  <div class="container">
+    <div class="row justify-content-center mb-3"><h5 class="font-weight-bold">Favourites</h5></div>
+
+    {% for row in items|batch(4) %}
+    <div class="row mb-3">
+      {% for item in row %}
+      <div class="col-md-3">
+        <div style="margin: 2px;">
+          <div class="card">
+            <a href="{{ url_for('product',pid=item['pid']) }}">
+              <img class="card-img-top" src="{{url_for('static', filename=item.image)}}" style="object-fit: cover;">
+            </a>
+          </div>
+          <a href="{{ url_for('product',pid=item['pid']) }}" style="color: black;">{{item['name']}}</a>
+          <h6>{{item['price']}}</h6>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="container mx-auto">
+    <p>You have no favourite items.</p>
+    <a href="{{ url_for('search',category='All') }}" style="border-radius: 0;padding: 10px;margin-top: 10px;" class="btn btn-dark btn-bl0ock mb-4">To the catalogue</a>
+  </div>
+{% endif %}
+</body>  
+
+{% endblock %}

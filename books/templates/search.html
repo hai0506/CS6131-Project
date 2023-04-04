@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <form action="{{ url_for('search') }}" method="post">
+        <div class="d-flex gap-4 mb-5">
+            <select name="category" id="category" style="width: 600px;">
+                {% for field in fields %}
+                <option value="{{field}}">Search by {{field}}</option>
+                {% endfor %}
+            </select>
+            <input type="text" class="form-control" name="search" placeholder="Enter your search text" id="search">
+            <input type="submit" value="Search" class="btn btn-lg btn-dark">
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Year</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for item in books %}
+                <td>{{item.title}}</td>
+                <td>{{item.author}}</td>
+                <td>{{item.year}}</td>
+                <td>{{item.genre}}</td>
+                <td>{% for i in range(item.rating) %}
+                    <i class="bi bi-star"></i>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+  

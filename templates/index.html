@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Home | RBLX{% endblock %}
+{% block content %}
+<body style="background-color: white;">
+  <div class="container text-center">  
+    <img class="img-fluid mb-3" src="static/images/Tim-Henson@2000x1500.jpg" width="900"></i>
+    <div class="img-txt">
+      New Arrivals
+    </div>
+    <div class="img-txt2">
+      Find what we have to offer this winter.
+    </div>
+    <a class="img-btn" href="{{ url_for('search',category='All') }}">
+      Explore
+    </a>
+    <img class="img-fluid mb-3" src="static/images/male-models-noah.webp" width="900"></i>
+    <div class="img-txt3">
+      Men's Fashion
+    </div>
+    <div class="img-txt4">
+      Clothes for men.
+    </div>
+    <a class="img-btn2" href="{{ url_for('search',category='Men') }}">
+      Explore
+    </a>
+    <img class="img-fluid mb-3" src="static/images/japanes-models.jpg" width="900"></i>
+    <div class="img-txt5">
+      Women's Fashion
+    </div>
+    <div class="img-txt6">
+      Clothes for women.
+    </div>
+    <a class="img-btn3" href="{{ url_for('search',category='Women') }}">
+      Explore
+    </a>
+  </div>
+
+  <div class="container">
+    <a class="btn-bottom" href="{{ url_for('search',category='All') }}">
+      View all items
+    </a>
+  </div>
+</body>
+{% endblock %}

@@ -1,0 +1,33 @@
+.card-img-top {
+    width: 17.5rem;
+    height: 24rem;
+    object-fit: cover;
+}
+.has-search .form-control {
+    padding-left: 2.375rem;
+    border: none;
+    border-bottom: #8c8c8c 2px solid;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+}
+.dropdown-menu {
+    padding-left: 10px !important;
+    min-width: 200px !important;
+}
+.dropdown-toggle {
+    background:white !important;
+    border-color: white !important;
+    color: black !important;
+}
+.btn:focus {
+    box-shadow: none !important;
+}

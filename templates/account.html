@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Account | RBLX{% endblock %}
+{% block content %}
+<body style="background-color: #f9f9f8;">
+  <!-- <div class="container text-center" style="margin-top:50px;">
+    <h4 style="font-weight:bold;">My Account</h4>
+  </div> -->
+  <div class="container" style="max-width: 900px;margin-top: 50px;margin: auto;">
+    <div class="row">
+      <div class="col-4" style="border-right: 30px solid transparent;">
+        <div class="row bg-white" id="profile-tab">
+          <a href="{{ url_for('profile') }}" style="color: black;">Profile</a>
+        </div>
+        <div class="row bg-white" id="profile-tab">
+          <a href="{{ url_for('past_orders') }}" style="color: black;">Past orders</a>
+        </div>
+        <div class="row bg-white" id="profile-tab">
+          <a href="{{ url_for('vouchers') }}" style="color: black;">Vouchers</a>
+        </div>
+        <div class="row bg-white" id="profile-tab">
+          <a href="{{ url_for('logout') }}" style="color: black;">Sign out</a>
+        </div>
+      </div>  
+      <div class="col-8">
+        <div class="container-fluid text-center" style="margin-bottom:20px;"><h5 style="font-weight:bold">{% block header %}{% endblock %}</h5></div>
+        {% block content2 %}{% endblock %}
+      </div>  
+    </div>
+  </div>
+</body>
+{% endblock %}

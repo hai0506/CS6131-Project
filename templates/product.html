@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}{{item.name}} | RBLX{% endblock %}
+{% block content %}
+<body style="background-color: white;">
+    <div class="container">
+        <div class="row">
+           <div class="col-4">
+                <img style="max-width:100%;" src="{{url_for('static',param=param, filename=item.image)}}" />
+            </div>
+            <div class="col-1"></div>
+            <div class="col-7">
+                <h4>{{item.name}}</h4>    
+                <h6 style="margin-bottom: 30px;">{{item.designer}}</h6>    
+                <h4 style="margin-bottom: 30px;">${{item.price}}</h4> 
+                <h6 class="title-attr"><small>Size</small></h6>    
+                <form action="{{ url_for('product',pid=item.pid) }}" method="post" >
+                    <select name="size" id="size" style="width: 400px;margin-bottom: 30px;" onchange="javascript:location.href = this.value;">
+                        {% for row in others %}
+                        {% if item.size == row['size'] %}
+                        <option value="{{url_for('product',pid=row['pid'])}}" selected>{{row['size']}}</option>
+                        {% else %}<option value="{{url_for('product',pid=row['pid'])}}">{{row['size']}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select> 
+
+                    <div class="section" style="padding-bottom:20px;">
+                        <h6 class="title-attr"><small>Quantity</small></h6>                    
+                        <input name="quantity" value="1" />
+                    </div>                
+                
+                    <div class="section" style="padding-bottom:50px;">
+                        <input type="submit" name="submit_button" value="Add to cart" class="btn btn-dark">
+                    </div>    
+                    <div class="section" style="padding-bottom:20px;">
+                        <input type="submit" name="submit_button" value="Add to favourites" class="btn btn-dark">
+                    </div>  
+                </form>                                    
+            </div>                              
+        </div>
+    </div>        
+</body>  
+
+{% endblock %}
