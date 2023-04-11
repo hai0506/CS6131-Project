@@ -217,3 +217,18 @@ h5 span {
     border-bottom:#f9f9f8 solid 3px;
     box-shadow: 0px 0px 2px 2px #e8e8e8;
 }
+#favourite-delete {
+    position: absolute;
+    bottom: 345px;
+    left: 210px;
+    width: 20px;
+    height: 28px;
+    background-color: white;
+    align-content: center;
+}
+#favourite-delete2 {
+    width: 40px;
+    position: absolute;
+    bottom: 344px;
+    left: 205px;
+}

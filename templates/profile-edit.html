@@ -1,0 +1,19 @@
+{% extends 'account.html' %}
+{% block header %}My account{% endblock %}
+{% block content2 %}
+<div class="container-fluid bg-white" style="padding: 20px; box-shadow: 0px 0px 2px 2px #e8e8e8;">
+    <form action="{{ url_for('profile_edit') }}" method="post" class="was-validated">
+        <p style="font-size: 13px; margin-bottom: 0;">Name</p>
+        <input type="text" name ="name" value="{{user.name}}" class="form-control form-control-sm mb-1" maxlength="50" required/>
+        <p style="font-size: 13px; margin-bottom: 0;">Email</p>
+        <input type="text" name ="email" value="{{user.email}}" class="form-control form-control-sm mb-1" maxlength="50" required/>
+        <p style="font-size: 13px; margin-bottom: 0;">Phone Number</p>
+        <input type="text" name ="phone" value="{{user.phoneNo}}" class="form-control form-control-sm mb-1" maxlength="25" required/>
+        <p style="font-size: 13px; margin-bottom: 0;">Date of birth</p>
+        <input type="date" name ="dob" value="{{user.dateOfBirth}}" class="form-control form-control-sm mb-1" maxlength="25" required/>
+        <p style="font-size: 13px; margin-bottom: 0;">Address</p>
+        <input type="text" name ="address" value="{{user.address}}" class="form-control form-control-sm mb-4" maxlength="255" required/> 
+        <input type="submit" name="Save" value="Save" class="btn btn-dark" style="width: 100px;">         
+    </form>
+</div>
+{% endblock %}

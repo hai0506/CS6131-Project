@@ -4,7 +4,6 @@
 <body style="background-color: #f9f9f8;">
 {% if items %}
   <section class="h-100 gradient-custom">
-    <form action="{{ url_for('cart') }}" method="post" >
     <div class="container py-5">
       <div class="row d-flex justify-content-center my-4">
         <div class="col-md-8">
@@ -13,49 +12,36 @@
               <h5 class="mb-0">Cart - {{items|length}} items</h5>
             </div>
             <div class="card-body">
-              <!-- Single item -->
               {% for item in items %}
               <div class="row">
                 <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                  <!-- Image -->
                   <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
                     <img src="{{url_for('static', filename=item.image)}}" style="width:150px;height:180px;object-fit:cover;"/>
                     <a href="#!">
                       <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                     </a>
                   </div>
-                  <!-- Image -->
                 </div>
   
                 <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                  <!-- Data -->
                   <p><strong>{{item.name}}</strong></p>
                   <p>Size: {{item.size}}</p>
-                  <input type="button" class="btn btn-white btn-sm me-1 mb-2" name="delete" value="{{item.pid">
-                  <input type="button" class="btn btn-white btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-                    title="Remove item">
-                    <i class="bi bi-trash"></i>
-                  </input>
-                  <!-- Data -->
+                  <form method="post" action="{{ url_for('delete_item', pid=item.pid) }}" style="margin-top: 80px;" onkeydown="return event.key != 'Enter';">
+                    <input class="btn" type="image" name="delete" src="{{ url_for('static',filename='icons/trash.png') }}" style="width: 45px;">
+                  </form>
                 </div>
   
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                  <!-- Quantity -->
                   <div class="d-flex mb-4" style="max-width: 300px">
-                    <!-- <button class="btn btn-primary px-3 me-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                      -
-                    </button> -->
-                    
-                    <div class="form-outline"> <small id="label" for="quantity">Quantity</small>
-                    <input min="0" name="quantity{{item.pid}}" value="{{item.quantity}}" type="number" class="form-control" />
-                    </div>
-                    <!-- <button class="btn btn-primary px-3 ms-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                      +
-                    </button> -->
+                    <form method="post" action="{{ url_for('update_quantity', pid=item.pid) }}">
+                      <div class="form-outline"> <small id="label" for="quantity">Quantity</small>
+                        <div class="d-flex mb-4">
+                          <input min="0" max="20" name="quantity" value="{{item.quantity}}" type="number" class="form-control" style="width: 200px;" onchange="this.form.submit()" required/>
+                          <input type="submit" hidden>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-
                   <p class="text-start text-md-center">
                     <strong>${{"%.2f"|format(item.quantity*item.price)}}</strong>
                   </p>
@@ -76,7 +62,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   Products
-                  <span>${{items[0].totalPrice}}</span>
+                  <span>${{"%.2f"|format(items[0].totalPrice)}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   Shipping
@@ -86,16 +72,17 @@
                   <div>
                     <strong>Total amount</strong>
                   </div>
-                  <span><strong>${{items[0].totalPrice}}</strong></span>
+                  <span><strong>${{"%.2f"|format(items[0].totalPrice)}}</strong></span>
                 </li>
               </ul>
-              <input type="submit" name="checkout" value="Checkout" class="btn btn-dark btn-lg btn-block">
+              <form action="{{ url_for('cart') }}" method="post" >
+                <input type="submit" name="checkout" value="Continue to checkout" class="btn btn-dark btn-lg btn-block">
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </form>
   </section>
 {% else %}
   <div class="container mx-auto">

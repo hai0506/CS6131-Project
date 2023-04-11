@@ -1,18 +1,17 @@
 {% extends 'account.html' %}
-{% block head %}My account{% endblock %}
+{% block header %}My account{% endblock %}
 {% block content2 %}
 <div class="container-fluid bg-white" style="padding: 20px; box-shadow: 0px 0px 2px 2px #e8e8e8;">
-    <!-- <b style="margin-bottom: 40px">{% block header %}Profile{% endblock %}</b>
-    <p><p></p></p> -->
     <p style="font-size: 13px; margin-bottom: 0;">Name</p>
-    <p>{{ session['name'] }}</p>
+    <p>{{ user['name'] }}</p>
     <p style="font-size: 13px; margin-bottom: 0;">Email</p>
-    <p>{{ session['email'] }}</p>
+    <p>{{ user['email'] }}</p>
     <p style="font-size: 13px; margin-bottom: 0;">Phone Number</p>
-    <p>{{ session['phone'] }}</p>
+    <p>{{ user['phoneNo'] }}</p>
     <p style="font-size: 13px; margin-bottom: 0;">Date of birth</p>
-    <p>{{ session['dob'] }}</p>
+    <p>{{ user['dateOfBirth'].strftime("%d/%m/%Y") }}</p>
     <p style="font-size: 13px; margin-bottom: 0;">Address</p>
-    <p>{{ session['address'] }}</p>
+    <p>{{ user['address'] }}</p>
+    <a class="btn btn-dark" href="{{url_for('profile_edit')}}">Edit</a>
   </div>
 {% endblock %}

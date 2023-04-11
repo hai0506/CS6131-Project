@@ -30,20 +30,20 @@ def discount():
         (code,cid,amount,startDate,endDate))
 
 def sale():
-    for i in range(0,5):
+    for i in range(0,20):
         amount = random.randint(1,5)*10
         startDate="2022/"+'{:0>2}'.format(random.randint(1,4))+"/"+'{:0>2}'.format(random.randint(1,28))
         endDate="2022/"+'{:0>2}'.format(random.randint(5,12))+"/"+'{:0>2}'.format(random.randint(1,28))
-        print('INSERT INTO discount VALUES (NULL,{0}, \'{1}\', \'{2}\');'.format
+        print('INSERT INTO sale VALUES (NULL,{0}, \'{1}\', \'{2}\');'.format
         (amount,startDate,endDate))
 
 def product():
     a = pd.read_csv('adults.csv')
-    kids = pd.read_csv("kids.csv")
-    for index,row in kids.iterrows():
+    # kids = pd.read_csv("kids.csv")
+    for index,row in a.iterrows():
         type=row['label']
         addDate="2023/"+'{:0>2}'.format(random.randint(1,3))+"/"+'{:0>2}'.format(random.randint(1,28))
-        image='kids_clothes/'+row['image']+".jpg"
+        image='clothes/'+row['image']+".jpg"
         adj = ['aback','abaft','abandoned','abashed','aberrant',  'abhorrent',  'abiding',  'abject',  'ablaze',  'able',  'abnormal',
   'aboriginal',  'abortive',  'abounding',  'abrasive',  'abrupt',  'absent',  'absorbed',  'absorbing',  'abstracted',  'absurd',
   'abundant',  'abusive',  'acceptable',  'accessible',  'accidental',  'accurate',  'acid',  'acidic',  'acoustic',  'acrid',
@@ -1008,12 +1008,10 @@ def product():
         name=adj[random.randint(0,len(adj)-1)].capitalize()+" "+row.label.capitalize()
         designerid=random.randint(1,5)
         price = random.randint(10,100)-0.1
-        if(random.randint(1,10)==1): saleid = 6
-        else: saleid = 'NULL' 
-        for size in ['S','M','L']:
+        for size in ['S','M']:
             stock=random.randint(20,100)
-            print('INSERT INTO product VALUES (NULL,\'{0}\', {1}, \'{2}\', \'{3}\', {4}, {5}, {6}, \'{7}\', \'{8}\');'
-            .format(name,stock,type,size,price,saleid,designerid,addDate,image))
+            print('INSERT INTO product VALUES (NULL,\'{0}\', {1}, \'{2}\', \'{3}\', {4}, {5}, \'{6}\', \'{7}\');'
+            .format(name,stock,type,size,price,designerid,addDate,image))
             price += 2.0
 
 def category():
@@ -1022,50 +1020,48 @@ def category():
     for i in range(0,len(a.index)):
         label = a.iloc[i].label
         gender = random.randint(0,1)
-        for j in range(1,4):
-            if(gender==0): print('INSERT INTO category VALUES ({0}, \'Men\');'.format(i*3+j))
-            else: print('INSERT INTO category VALUES ({0}, \'Women\');'.format(i*3+j))
+        for j in range(1,3):
+            if(gender==0): print('INSERT INTO category VALUES ({0}, \'Men\');'.format(i*2+j))
+            else: print('INSERT INTO category VALUES ({0}, \'Women\');'.format(i*2+j))
             if(label in ['T-Shirt', 'Longsleeve', 'Shirt', 'Outwear', 'Polo', 'Hoodie','Blazer']):
-                print('INSERT INTO category VALUES ({0}, \'Top\');'.format(i*3+j))
+                print('INSERT INTO category VALUES ({0}, \'Top\');'.format(i*2+j))
             elif(label in ['Pants', 'Skirt', 'Shorts']):
-                print('INSERT INTO category VALUES ({0}, \'Bottom\');'.format(i*3+j))
+                print('INSERT INTO category VALUES ({0}, \'Bottom\');'.format(i*2+j))
             elif(label =='Hat'):
-                print('INSERT INTO category VALUES ({0}, \'Hat\');'.format(i*3+j))
+                print('INSERT INTO category VALUES ({0}, \'Hat\');'.format(i*2+j))
             elif(label == "Shoes"):
-                print('INSERT INTO category VALUES ({0}, \'Shoes\');'.format(i*3+j))
+                print('INSERT INTO category VALUES ({0}, \'Shoes\');'.format(i*2+j))
     for i in range(0,len(kids.index)):
         label = kids.iloc[i].label
         gender = random.randint(0,1)
-        for j in range(1,4):
-            print('INSERT INTO category VALUES ({0}, \'Kids\');'.format((i+81)*3+j))
+        print('INSERT INTO category VALUES ({0}, \'Kids\');'.format((i+55)))
 
 def color(): 
     a = pd.read_csv('adults.csv')
     kids = pd.read_csv("kids.csv")
     # for i in range(0,len(a.index)):
-    #     image='clothes/'+a.iloc[i]['image']+".jpg"
+    #     image='static/clothes/'+a.iloc[i]['image']+".jpg"
     #     img = Image.open(image)
     #     img.show()
     #     while(True):
     #         color = input()
     #         if color == "a": break
     #         else: 
-    #             for j in range(1,4):
+    #             for j in range(1,3):
     #                 f = open("z.txt", "a")  
-    #                 f.write('INSERT INTO color VALUES ({0}, \'{1}\');\n'.format(i*3+j,color))
+    #                 f.write('INSERT INTO color VALUES ({0}, \'{1}\');\n'.format(i*2+j,color))
     #                 f.close()
     for i in range(0,len(kids.index)):
-        image='kids_clothes/'+kids.iloc[i]['image']+".jpg"
+        image='static/kids_clothes/'+kids.iloc[i]['image']+".jpg"
         img = Image.open(image)
         img.show()
         while(True):
             color = input()
             if color == "a": break
             else: 
-                for j in range(1,4):
-                    f = open("z.txt", "a")  
-                    f.write('INSERT INTO color VALUES ({0}, \'{1}\');\n'.format((i+81)*3+j,color))
-                    f.close()
+                f = open("z.txt", "a")  
+                f.write('INSERT INTO color VALUES ({0}, \'{1}\');\n'.format((i+53),color))
+                f.close()
 
 def cart():
     for i in range(0,20):
@@ -1077,10 +1073,46 @@ def cart():
         print('INSERT INTO cart VALUES (NULL, DEFAULT, {0}, \'{1}\', {2}, \'{3}\');'.format(cid,date,price,status[s]))
 
 def addedto():
+    for i in range(1,21):
+        pid = random.randint(1,56)
+        quantity = random.randint(1,5)
+        print('INSERT INTO addedto VALUES ({0}, {1}, {2});'.format(pid,i,quantity))
     for i in range(0,30):
         cartid = random.randint(1,20)
-        pid = random.randint(1,273)
+        pid = random.randint(1,56)
         quantity = random.randint(1,5)
         print('INSERT INTO addedto VALUES ({0}, {1}, {2});'.format(pid,cartid,quantity))
 
-addedto()
+def favourite():
+    for i in range(0,30):
+        cid = random.randint(1,30)
+        pid = random.randint(1,56)
+        print('INSERT INTO favourite VALUES ({0}, {1});'.format(pid,cid))
+
+def feedback():
+    for i in range(0,20):
+        cid = random.randint(1,30)
+        c = ['Missing items','Request refund','Request order cancellation','Other']
+        category = c[random.randint(0,3)]
+        print('INSERT INTO feedback VALUES ({0}, \'{1}\',\'\');'.format(cid,category))
+
+def onsale():
+    for i in range(0,20):
+        saleid = random.randint(1,20)
+        pid = random.randint(1,56)
+        print('INSERT INTO onsale VALUES ({0}, {1});'.format(saleid,pid))
+
+def review():
+    for i in range(0,20):
+        cid = random.randint(1,30)
+        pid = random.randint(1,56)
+        rating = random.randint(1,5)
+        if rating == 1: comment = 'Terrible'
+        if rating == 2: comment = 'Bad'
+        if rating == 3: comment = 'Okay'
+        if rating == 4: comment = 'Good'
+        if rating == 5: comment = 'Excellent'
+        date="2022/"+'{:0>2}'.format(random.randint(1,4))+"/"+'{:0>2}'.format(random.randint(1,28))
+        print('INSERT INTO review VALUES ({0}, {1}, {2}, \'{3}\', \'{4}\');'.format(pid,cid,rating,comment,date,))
+
+review()

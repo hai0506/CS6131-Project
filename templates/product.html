@@ -16,27 +16,100 @@
                 <form action="{{ url_for('product',pid=item.pid) }}" method="post" >
                     <select name="size" id="size" style="width: 400px;margin-bottom: 30px;" onchange="javascript:location.href = this.value;">
                         {% for row in others %}
-                        {% if item.size == row['size'] %}
-                        <option value="{{url_for('product',pid=row['pid'])}}" selected>{{row['size']}}</option>
-                        {% else %}<option value="{{url_for('product',pid=row['pid'])}}">{{row['size']}}</option>
+                        {% if row['stock'] > 0 %}
+                          {% if item.size == row['size'] %}
+                          <option value="{{url_for('product',pid=row['pid'])}}" selected>{{row['size']}}</option>
+                          {% else %}<option value="{{url_for('product',pid=row['pid'])}}">{{row['size']}}</option>
+                          {% endif %}
                         {% endif %}
                         {% endfor %}
                     </select> 
 
                     <div class="section" style="padding-bottom:20px;">
                         <h6 class="title-attr"><small>Quantity</small></h6>                    
-                        <input name="quantity" value="1" />
+                        <input name="quantity" type="number" value="1" min="1" max="{{item.stock}}" required/>
                     </div>                
                 
-                    <div class="section" style="padding-bottom:50px;">
+                    {% if session['username'] %} 
+                    <div class="section" style="padding-bottom:20px;">
                         <input type="submit" name="submit_button" value="Add to cart" class="btn btn-dark">
-                    </div>    
+                    </div> 
+                    {% else %}
+                    <div class="section" style="padding-bottom:20px;">
+                        <button type="button" class="btn btn-dark"  data-toggle="modal" data-target="#myModal" style="border-radius: 0;">Add to cart</button>
+                    </div> 
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Unable to add to cart</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              You must first sign in.
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <a href="{{ url_for('login') }}" class="btn btn-primary">Sign in</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    {% endif %}
+
+
+                    {% if session['username'] %} 
                     <div class="section" style="padding-bottom:20px;">
                         <input type="submit" name="submit_button" value="Add to favourites" class="btn btn-dark">
                     </div>  
+                    {% else %}
+                    <div class="section" style="padding-bottom:20px;">
+                        <button type="button" class="btn btn-dark"  data-toggle="modal" data-target="#myModal2" style="border-radius: 0;">Add to favourites</button>
+                    </div> 
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Unable to add to favourites</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              You must first sign in.
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <a href="{{ url_for('login') }}" class="btn btn-primary">Sign in</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
                 </form>                                    
             </div>                              
         </div>
+        {% if similar %}
+        <div class="row justify-content-center mb-3" style="margin-top: 50px;"><h5 class="font-weight-bold">Frequently bought with this product:</h5></div>
+        <div class="row justify-content-center mb-3">
+          {% for item in similar %}
+          <div class="col-md-3">
+            <div style="margin: 2px;">
+              <div class="card">
+                <a href="{{ url_for('product',pid=item['pid']) }}">
+                  <img class="card-img-top" src="{{url_for('static', filename=item.image)}}" style="object-fit: cover;">
+                </a>
+              </div>
+              <a href="{{ url_for('product',pid=item['pid']) }}" style="color: black;">{{item['name']}}</a>
+              <h6>{{item['price']}}</h6>
+            </div>
+          </div>
+          {% endfor %}
+        </div>       
+        {% endif %}
     </div>        
 </body>  
 

@@ -15,6 +15,10 @@
             <a href="{{ url_for('product',pid=item['pid']) }}">
               <img class="card-img-top" src="{{url_for('static', filename=item.image)}}" style="object-fit: cover;">
             </a>
+            <form method="post" action="{{ url_for('unfavourite', pid=item.pid) }}" onkeydown="return event.key != 'Enter';">
+              <div id="favourite-delete"  class="container"></div>
+              <input id="favourite-delete2" class="btn" type="image" name="delete" src="{{ url_for('static',filename='icons/trash.png') }}">
+            </form>
           </div>
           <a href="{{ url_for('product',pid=item['pid']) }}" style="color: black;">{{item['name']}}</a>
           <h6>{{item['price']}}</h6>
@@ -30,6 +34,7 @@
     <a href="{{ url_for('search',category='All') }}" style="border-radius: 0;padding: 10px;margin-top: 10px;" class="btn btn-dark btn-bl0ock mb-4">To the catalogue</a>
   </div>
 {% endif %}
+
 </body>  
 
 {% endblock %}
