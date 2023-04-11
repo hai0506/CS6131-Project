@@ -55,7 +55,7 @@ def search(category):
 
     items=[]
 
-    query = 'with q as (select distinct p1.pid, p1.name, price, image,addDate,stock from product p1, color, category, designer where p1.pid = color.pid and p1.pid = category.pid and designer.designerid = p1.designerid and (p1.name like \'{0}\' or designer.name like \'{0}\') and (\'{1}\'="All" or category = \'{1}\' and stock > 0) '.format(search,category)
+    query = 'with q as (select distinct p1.pid, p1.name, price, image,addDate,stock from product p1, color, category, designer where p1.pid = color.pid and p1.pid = category.pid and designer.designerid = p1.designerid and (p1.name like \'{0}\' or designer.name like \'{0}\') and (\'{1}\'="All" or category = \'{1}\') and stock > 0 '.format(search,category)
     if colors: query += 'and color in {0}'.format(colors)
     if sizes: query += 'and size in {0}'.format(sizes)
     if types: query += 'and type in {0}'.format(types)
@@ -222,7 +222,7 @@ def profile_edit():
             cursor.execute('SELECT * FROM customer WHERE cid = %s', (session['id'],))
             user = cursor.fetchone()
             cursor.close()
-            return redirect('profile.html')
+            return redirect(url_for('profile'))
         return render_template('profile-edit.html',user=user)
     return redirect(url_for('login'))
 @app.route('/past_orders')
@@ -247,7 +247,6 @@ def cart():
         cursor.execute('select cartid from cart where cid=%s and date is null', (session['id'],))
         cartid = cursor.fetchone()
         if not cartid:
-            # cursor.execute('INSERT INTO cart VALUES (NULL, DEFAULT, %s, NULL, NULL, NULL)',(session['id'],))
             items=()
         else:
             cartid = cartid['cartid']
@@ -273,7 +272,6 @@ def delete_item(pid):
     cursor.execute('delete from addedto where cartid = %s and pid = %s',(cartid,pid))
     mysql.connection.commit()
     cursor.execute('select cart.cartid,totalPrice,product.pid,product.name,price,size,quantity,image,totalPrice from cart,addedto,product where addedto.cartid = %s and product.pid = addedto.pid and cid = %s and date is null', (cartid,session['id'],))
-    items = cursor.fetchall()
     cursor.close()
     return redirect(url_for('cart'))
 
@@ -292,7 +290,6 @@ def update_quantity(pid):
             cursor.execute('update addedto set quantity = %s where cartid = %s and pid = %s',(quantity,cartid,pid))
             mysql.connection.commit()
         cursor.execute('select cart.cartid,totalPrice,product.pid,product.name,price,size,quantity,image,totalPrice from cart,addedto,product where addedto.cartid = %s and product.pid = addedto.pid and cid = %s and date is null', (cartid,session['id'],))
-        items = cursor.fetchall()
         cursor.close()
         return redirect(url_for('cart'))
     return redirect(url_for('login'))
@@ -343,7 +340,6 @@ def unfavourite(pid):
         cursor.execute('delete from favourite where cid = %s and pid = %s',(session['id'],pid))
         mysql.connection.commit()
         cursor.execute('SELECT product.pid, product.name, product.price, product.image FROM favourite,product WHERE cid = %s and favourite.pid = product.pid', (session['id'],))
-        items = cursor.fetchall()
         cursor.close()
         return redirect(url_for('favourites'))
     return redirect(url_for('login'))
